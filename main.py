@@ -14,7 +14,7 @@ def production_simulation(n):
     workers = []
     slot_index = 0
     available_slot_index = 0
-    for x in range(3): # Create 3 pairs of workers
+    for x in range(3):  # Create 3 pairs of workers
         # Create pair of workers
         workers.append(Worker(slot_index, available_slot_index))
         workers.append(Worker(slot_index, available_slot_index))
@@ -47,6 +47,7 @@ def production_simulation(n):
 
     print("Summary A:" + str(unfinished_component_a) + " B:" + str(unfinished_component_b) + " P:" + str(
         finished_product))
+    del line
 
 
 production_simulation(100)

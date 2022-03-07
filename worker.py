@@ -50,12 +50,12 @@ class Worker:
                     self.pick_item(conveyor, available)  # Pick item from conveyor
                     self.is_busy = True  # Worker start assembling
 
-            elif any(isinstance(x, P) for x in self.hands) and len(
-                    self.hands) < 2:  # If product is in worker's hand and second hans is empty
+            elif any(isinstance(x, P) for x in self.hands) and len(self.hands) < 2:  # If product is in worker's hand and second hans is empty
                 if isinstance(conveyor[self.place_index], A) or isinstance(conveyor[self.place_index], B):
                     self.pick_item(conveyor, available)  # Pick item from conveyor
                 elif conveyor[self.place_index] is None:  # If its None, worker can put finished product on conveyor
                     self.put_on_conveyor(conveyor)
+
             elif any(isinstance(x, P) for x in self.hands):  # When worker have product and component in hand already
                 if conveyor[self.place_index] is None:
                     self.put_on_conveyor(conveyor)
