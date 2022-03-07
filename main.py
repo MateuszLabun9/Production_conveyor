@@ -1,6 +1,6 @@
 import random
 from component import A, B, P
-from worker import worker
+from worker import Worker
 from ProductionLine import ProductionLine
 
 
@@ -10,12 +10,16 @@ def production_simulation(n):
     finished_product = 0
     line = ProductionLine(['A', 'B', None], [.3, .3, .3], 5)  # Create production line
     # Create workers
-    worker1 = worker(0, 0)
-    worker2 = worker(0, 0)
-    worker3 = worker(2, 1)
-    worker4 = worker(2, 1)
-    worker5 = worker(4, 2)
-    worker6 = worker(4, 2)
+
+    workers = []
+    slot_index = 0
+    available_slot_index = 0
+    for x in range(3):
+        # Create pair of workers
+        workers.append(Worker(slot_index, available_slot_index))
+        workers.append(Worker(slot_index, available_slot_index))
+        slot_index += 2
+        available_slot_index += 1
 
     for x in range(n):  # Run n step of simulation
         for z in line.available_slot:  # reset available slot flag for workers
@@ -36,13 +40,10 @@ def production_simulation(n):
             unfinished_component_b += 1
         elif isinstance(output, P):
             finished_product += 1
+        del output
 
-        worker1.check_hands(line.conveyor, line.available_slot)
-        worker2.check_hands(line.conveyor, line.available_slot)
-        worker3.check_hands(line.conveyor, line.available_slot)
-        worker4.check_hands(line.conveyor, line.available_slot)
-        worker5.check_hands(line.conveyor, line.available_slot)
-        worker6.check_hands(line.conveyor, line.available_slot)
+        for y in range(len(workers)):
+            workers[y].check_hands(line.conveyor, line.available_slot)
 
     print("Summary A:" + str(unfinished_component_a) + " B:" + str(unfinished_component_b) + " P:" + str(
         finished_product))

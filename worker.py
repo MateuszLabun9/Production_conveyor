@@ -1,7 +1,7 @@
 from component import A, B, P
 
 
-class worker:
+class Worker:
     def __init__(self, place_index, pair_index):
         self.place_index = place_index  # Slot index of place where worker is operating
         self.pair_index = pair_index  # Pair index used to check availability of conveyor slot
