@@ -12,7 +12,8 @@ class Worker:
     def put_on_conveyor(self, conveyor):  # Method used to put product on conveyor
         if conveyor[self.place_index] is None:  # Check if conveyor slot is empty
             conveyor[self.place_index] = self.hands[0]  # Put product on conveyor
-            self.hands.pop(0)
+            val = self.hands.pop(0)
+            del val
 
     def pick_item(self, conveyor, available):  # Pick item from conveyor
         self.hands.append(conveyor[self.place_index])  # Pick item
